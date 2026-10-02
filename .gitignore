@@ -5,3 +5,6 @@ node_modules/
 .vercel/
 *.zip
 test-results/
+
+functions/node_modules/
+public/firebase-client.js

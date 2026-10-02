@@ -1,0 +1,33 @@
+name: Firebase deploy
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm ci --prefix functions
+      - run: npm test
+      - run: npm run build
+      - id: credential
+        run: if [ -n "$SERVICE_ACCOUNT" ]; then echo available=true >> "$GITHUB_OUTPUT"; else echo available=false >> "$GITHUB_OUTPUT"; fi
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_DEPLOY_SERVICE_ACCOUNT }}
+      - if: github.event_name == 'push' && steps.credential.outputs.available == 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_DEPLOY_SERVICE_ACCOUNT }}
+      - if: github.event_name == 'push' && steps.credential.outputs.available == 'true'
+        run: npx firebase-tools deploy --project niyet-e4d9 --only hosting,functions,firestore:rules
+      - if: github.event_name == 'push' && steps.credential.outputs.available != 'true'
+        run: echo 'Checks passed; Firebase deployment is waiting for FIREBASE_DEPLOY_SERVICE_ACCOUNT.'
