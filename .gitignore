@@ -2,9 +2,5 @@ node_modules/
 .env*
 !.env.example
 .data/
-.vercel/
 *.zip
 test-results/
-
-functions/node_modules/
-public/firebase-client.js

@@ -7,6 +7,7 @@ const root = resolve('public');
 const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'application/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.webmanifest': 'application/manifest+json', '.woff2': 'font/woff2', '.ttf': 'font/ttf' };
 const server = createServer(async (req, res) => {
   const pathname = new URL(req.url, 'http://local').pathname;
+  if (pathname === '/health') { res.writeHead(200, { 'Content-Type': 'application/json' }); return res.end('{"ok":true}'); }
   if (pathname.startsWith('/api/')) return handler(req, res);
   let path; try { path = decodeURIComponent(pathname); } catch { res.writeHead(400); return res.end(); }
   if (path === '/' || path === '/admin' || path.startsWith('/g/')) path = '/index.html';
