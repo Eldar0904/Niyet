@@ -10,7 +10,7 @@
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.mjs",
     "setup": "node scripts/setup.mjs",
-    "deploy": "firebase deploy --project niyet-e4d9"
+    "deploy": "npm run build && firebase deploy --project niyet-e4d9"
   },
   "dependencies": { "firebase": "^11.0.0" },
   "devDependencies": { "esbuild": "^0.24.0", "firebase-tools": "^14.0.0" }
