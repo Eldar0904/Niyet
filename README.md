@@ -55,4 +55,4 @@ Admin PINs and session tokens are checked by the server. Invite tokens are store
 
 ## Assets
 
-Noto Sans and Noto Serif are self-hosted; their font metadata contains their license and attribution. The ornament is adapted from the Kazakh ornamental band in `flag-icons` 7.5.0, under MIT; see `THIRD_PARTY_LICENSES.md`. No external analytics, images, fonts, or Sites plugin are used.
+Noto Sans and Noto Serif are self-hosted; their font metadata contains their license and attribution. The hero and welcome pages use a custom `қошқар мүйіз` inspired mark; its paired spirals draw on the traditional motif. The prayer switch ornament remains unchanged. The legacy ornament and switch petal assets retain their flag-icons MIT attribution in `THIRD_PARTY_LICENSES.md`. No external analytics, images, fonts, or Sites plugin are used.
